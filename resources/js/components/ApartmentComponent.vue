@@ -101,14 +101,14 @@
             </div>
             <div v-for="apartment in selected_apartments" class="apartments-table">
                 <div class="apartments-table_item">{{apartment.owner_name}}</div>
-                <div class="apartments-table_item">{{apartment.city}}</div>
+                <div class="apartments-table_item">{{apartment.city.name}}</div>
                 <div class="apartments-table_item">{{apartment.address}}</div>
                 <div class="apartments-table_item">{{apartment.bedrooms}}</div>
                 <div class="apartments-table_item">{{apartment.house_floors}}</div>
                 <div class="apartments-table_item">{{apartment.floor}}</div>
                 <div class="apartments-table_item">
                     <div v-for="opt in apartment.options">
-                        <small>{{opt}}</small>
+                        <small>{{opt.name}}</small>
                     </div>
                 </div>
                 <div class="apartments-table_item">{{moneyFormat(apartment.price)}}</div>

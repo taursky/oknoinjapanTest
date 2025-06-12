@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Apartment;
+use App\Models\City;
+use App\Models\Options;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentSeeder extends Seeder
 {
@@ -21,22 +24,38 @@ class ApartmentSeeder extends Seeder
         }
 
         $file = fopen($csvFile, 'r');
-        fgetcsv($file, 0, ';');
+        fgetcsv($file, 0, ';'); // Пропускаем заголовок
+
+        // Очищаем таблицы перед заполнением
+        DB::table('apartments_options')->truncate();
+        Apartment::truncate();
+        City::truncate();
+        Options::truncate();
+
         while (($row = fgetcsv($file, 0, ';')) !== false) {
-            Apartment::create([
-                'owner_name' => $row[0],
-                'city' => $row[1],
-                'address' => $row[2],
+            // Обработка города
+            $city = City::firstOrCreate(['name' => trim($row[1])]);
+
+            // Создание квартиры
+            $apartment = Apartment::create([
+                'city_id' => $city->id,
+                'owner_name' => trim($row[0]),
+                'address' => trim($row[2]),
                 'bedrooms' => (int)$row[3],
                 'house_floors' => (int)$row[4],
                 'floor' => (int)$row[5],
-                'options' => array_map('trim', explode(',', $row[6])),
                 'price' => (float)$row[7],
             ]);
+
+            // Обработка опций
+            $options = array_map('trim', explode(',', $row[6]));
+            foreach ($options as $optionName) {
+                $option = Options::firstOrCreate(['name' => $optionName]);
+                $apartment->options()->attach($option->id);
+            }
         }
 
         fclose($file);
-
-        $this->command->info('Apartments seeded successfully!');
+        $this->command->info('Apartments, cities and options seeded successfully!');
     }
 }

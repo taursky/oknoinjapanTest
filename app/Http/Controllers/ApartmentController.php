@@ -9,7 +9,10 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments =Apartment::limit(10)->orderBy('city', 'asc')->get()->toArray();
+        $apartments = Apartment::limit(10)
+            ->with('city', 'options')
+            ->get()
+            ->toArray();
 
         return view('apartment', [
             'apartments' => $apartments,
