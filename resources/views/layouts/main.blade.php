@@ -7,9 +7,7 @@
     <meta name="keywords" content="@yield('keywords')"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} | @yield('title')</title>
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-    <link rel="stylesheet" href="/lib/fontawesome/css/all.css" type="text/css"/>
-    <script src="/lib/fontawesome/js/all.js"></script>
+    <link href="{{asset('logo.jpg')}}" rel="shortcut icon" type="image/x-icon"/>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>

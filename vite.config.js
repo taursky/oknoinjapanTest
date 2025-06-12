@@ -11,6 +11,26 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-        vue(),
+        vue(
+            {
+                template: {
+                    transformAssetUrls: {
+                        base: null,
+                        includeAbsolute: false,
+                    },
+                },
+            }
+        ),
     ],
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
+    server: {
+        host: '0.0.0.0',
+        hmr: {
+            host: 'test-job.local',
+        },
+    },
 });

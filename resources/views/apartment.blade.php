@@ -2,6 +2,6 @@
 @section('title', ' Тестовое задание')
 @section('content')
     <div class="content">
-        <h1>apatrtments</h1>
+        <apartment-component v-bind:apartments="{{ Js::from($apartments) }}"></apartment-component>
     </div>
 @endsection
