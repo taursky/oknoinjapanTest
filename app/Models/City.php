@@ -11,6 +11,7 @@ class City extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'id'
     ];
     public function apartments(): HasMany
     {

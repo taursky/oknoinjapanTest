@@ -264,4 +264,42 @@ export default {
 a {
     cursor: pointer;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-item a {
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.page-item.active a {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.page-item.disabled a {
+    color: #6c757d;
+    pointer-events: none;
+}
+.control-button {
+    vertical-align: middle;
+    margin-top: 5px;
+    padding: 0 4px;
+}
 </style>
+

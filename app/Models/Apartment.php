@@ -12,19 +12,15 @@ class Apartment extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'owner_name',
-        'city',
+        'city_id',
         'address',
         'bedrooms',
         'house_floors',
         'floor',
-        'options',
         'price',
     ];
-
-//    protected $casts = [
-//        'options' => 'array',
-//    ];
 
     public function options(): BelongsToMany
     {

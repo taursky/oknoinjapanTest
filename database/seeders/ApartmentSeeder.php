@@ -35,7 +35,6 @@ class ApartmentSeeder extends Seeder
         while (($row = fgetcsv($file, 0, ';')) !== false) {
             // Обработка города
             $city = City::firstOrCreate(['name' => trim($row[1])]);
-
             // Создание квартиры
             $apartment = Apartment::create([
                 'city_id' => $city->id,
